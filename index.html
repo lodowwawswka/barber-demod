@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://lchzbsbzbhuldtdzeuda.supabase.co; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+
+<title>Barber Studio | Rezerwacja</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0d0d0d;
+    color: white;
+}
+
+/* ===== MENU ===== */
+
+nav {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 25px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #d5a253;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-button {
+    background: #d5a253;
+    color: #111;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    min-height: 620px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(circle at center, #29231a 0%, #111 45%, #080808 100%);
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.small-title {
+    color: #d5a253;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 95px);
+    line-height: 0.95;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #d5a253;
+}
+
+.hero p {
+    color: #aaa;
+    font-size: 19px;
+    max-width: 600px;
+    margin: 0 auto 35px;
+    line-height: 1.6;
+}
+
+.main-button {
+    display: inline-block;
+    background: #d5a253;
+    color: #111;
+    padding: 17px 30px;
+    border-radius: 9px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.main-button:disabled { opacity: .55; cursor: wait; }
+button:hover {
+    transform: translateY(-2px);
+    background: #e5b66b;
+}
+
+/* ===== SERVICES ===== */
+
+.services {
+    background: #f5f2ed;
+    color: #111;
+    padding: 90px 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: #a7752d;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.section-title h2 {
+    font-size: 42px;
+    margin-top: 10px;
+}
+
+.cards {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    border: 1px solid #e5e5e5;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px #0001;
+}
+
+.card-icon {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #777;
+    line-height: 1.5;
+}
+
+.price {
+    display: block;
+    color: #a7752d;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* ===== BOOKING ===== */
+
+.booking-section {
+    padding: 100px 20px;
+    background: #111;
+}
+
+.booking-container {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.booking-info h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.booking-info h2 span {
+    color: #d5a253;
+}
+
+.booking-info p {
+    color: #aaa;
+    line-height: 1.7;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.info-row {
+    margin: 14px 0;
+    color: #ddd;
+}
+
+/* ===== CHAT ===== */
+
+.chat {
+    width: 100%;
+    background: white;
+    color: #111;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px #0006;
+}
+
+.header {
+    background: #181818;
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.online {
+    font-size: 12px;
+    color: #76d486;
+    font-weight: normal;
+}
+
+#messages {
+    padding: 22px;
+    height: 340px;
+    overflow-y: auto;
+    background: #fafafa;
+}
+
+.bot,
+.user {
+    padding: 11px 14px;
+    margin: 9px 0;
+    border-radius: 12px;
+    max-width: 82%;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+.bot {
+    background: #ececec;
+}
+
+.user {
+    background: #181818;
+    color: white;
+    margin-left: auto;
+}
+
+.buttons {
+    padding: 15px 22px 22px;
+    background: white;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    background: #181818;
+    color: white;
+    font-weight: bold;
+    transition: 0.15s;
+}
+
+button:disabled { opacity: .55; cursor: wait; }
+button:hover {
+    background: #d5a253;
+    color: #111;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    margin-top: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #d5a253;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    border-top: 1px solid #222;
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 800px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .booking-info h2 {
+        font-size: 38px;
+    }
+
+    .hero {
+        min-height: 540px;
+    }
+
+    nav {
+        height: 65px;
+    }
+
+    .nav-button {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+
+<nav>
+    <div class="logo">✂ BARBER<span>STUDIO</span></div>
+
+    <a href="#rezerwacja" class="nav-button">
+        Umów wizytę
+    </a>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            BARBER STUDIO
+        </div>
+
+        <h1>
+            TWÓJ STYL.<br>
+            <span>NASZA ROBOTA.</span>
+        </h1>
+
+        <p>
+            Profesjonalne strzyżenie, pielęgnacja brody
+            i klasyczny barbering. Zarezerwuj termin online
+            w kilka chwil.
+        </p>
+
+        <a href="#rezerwacja" class="main-button">
+            ✂ Umów wizytę
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- USŁUGI -->
+
+<section class="services">
+
+    <div class="section-title">
+        <span>OFERTA</span>
+        <h2>Nasze usługi</h2>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">✂️</div>
+            <h3>Strzyżenie</h3>
+            <p>
+                Klasyczne lub nowoczesne strzyżenie
+                dopasowane do Twojego stylu.
+            </p>
+            <span class="price">40 zł</span>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧔</div>
+            <h3>Broda</h3>
+            <p>
+                Profesjonalne przycinanie i modelowanie
+                brody.
+            </p>
+            <span class="price">30 zł</span>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💈</div>
+            <h3>Combo</h3>
+            <p>
+                Kompletny pakiet: strzyżenie włosów
+                oraz pielęgnacja brody.
+            </p>
+            <span class="price">60 zł</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REZERWACJA -->
+
+<section class="booking-section" id="rezerwacja">
+
+    <div class="booking-container">
+
+        <div class="booking-info">
+
+            <h2>
+                Zarezerwuj <span>wizytę.</span>
+            </h2>
+
+            <p>
+                Wybierz usługę, dzień i godzinę.
+                Następnie zostaw swoje dane kontaktowe.
+            </p>
+
+            <div class="info-row">
+                🕐 Poniedziałek – Piątek: 9:00 – 19:00
+            </div>
+
+            <div class="info-row">
+                🕐 Sobota: 9:00 – 15:00
+            </div>
+
+            <div class="info-row">
+                📍 Twój Barber Studio
+            </div>
+
+        </div>
+
+
+        <!-- BOT -->
+
+        <div class="chat">
+
+            <div class="header">
+                <span>✂️ BarberBot</span>
+                <span class="online">● online</span>
+            </div>
+
+            <div id="messages"></div>
+
+            <div class="buttons" id="buttons"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    © 2026 Barber Studio • Wszystkie prawa zastrzeżone<br><a href="./panel.html" style="color:#d5a253">Panel właściciela</a>
+</footer>
+
+
+<script type="module" src="./booking.js"></script>
+
+</body>
+</html>
